@@ -2,21 +2,25 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 
 /* Theme */
 import { materialTheme } from '../theme';
 
 /* Custom components */
-import { TopBar } from '../components';
+import { TopBar, CssBaseline } from '../components';
 
 const NextPage = ({ Component, pageProps }) => {
-  useEffect(() => {
+  const removeServerCSS = () => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
+
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
+  };
+
+  useEffect(() => {
+    removeServerCSS();
   }, []);
 
   return (
