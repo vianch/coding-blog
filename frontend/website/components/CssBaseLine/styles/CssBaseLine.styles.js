@@ -10,6 +10,7 @@ export const useStyles = makeStyles(({ breakpoints }) =>
           fontSize: fontSizes.large,
         },
       },
+      h2: {},
     },
   }),
 );

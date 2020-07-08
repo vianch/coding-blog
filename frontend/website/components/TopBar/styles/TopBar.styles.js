@@ -9,6 +9,7 @@ export const topBarStyles = makeStyles(() =>
       display: 'flex',
       alignItems: 'center',
       fontSize: fontSizes.medium,
+      maxWidth: '15rem',
 
       '&:hover': {
         textDecoration: 'none',

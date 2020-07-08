@@ -3,11 +3,17 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Link from '@material-ui/core/Link';
+import Hidden from '@material-ui/core/Hidden';
 
+/* Constants */
+import { blogLinks, blogImages } from '~/core';
+
+/* Styles */
 import { topBarStyles } from '~/components/TopBar/styles/TopBar.styles';
 
 const TopBar = () => {
   const classes = topBarStyles();
+  const { blog, about, contact } = blogLinks;
 
   return (
     <header>
@@ -15,26 +21,24 @@ const TopBar = () => {
         <Toolbar variant="dense">
           <Container>
             <Grid container spacing={0}>
-              <Grid item xs={6}>
-                <Link className={classes.blogName} href="/">
-                  <img
-                    alt="avatar"
-                    height="40"
-                    src="/assets/images/avatar.png"
-                  />
-                  <span>VIANCH BLOG</span>
-                </Link>
-              </Grid>
+              <Hidden only="xs">
+                <Grid item xs={6}>
+                  <Link className={classes.blogName} href="/">
+                    <img alt="avatar" height="40" src={blogImages.avatar} />
+                    <span>VIANCH BLOG</span>
+                  </Link>
+                </Grid>
+              </Hidden>
 
-              <Grid className={classes.mainLinkContainer} item xs={6}>
-                <Link className={classes.mainLink} href="/blog">
-                  Blog
+              <Grid className={classes.mainLinkContainer} item sm={6} xs={12}>
+                <Link className={classes.mainLink} href={blog.link}>
+                  {blog.name}
                 </Link>
-                <Link className={classes.mainLink} href="/about">
-                  About
+                <Link className={classes.mainLink} href={about.link}>
+                  {about.name}
                 </Link>
-                <Link className={classes.mainLink} href="/contact">
-                  Contact
+                <Link className={classes.mainLink} href={contact.link}>
+                  {contact.name}
                 </Link>
               </Grid>
             </Grid>

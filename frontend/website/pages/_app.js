@@ -8,6 +8,7 @@ import { materialTheme } from '../theme';
 
 /* Custom components */
 import { TopBar, CssBaseline } from '../components';
+import Footer from '~/components/Footer/Footer';
 
 const NextPage = ({ Component, pageProps }) => {
   const removeServerCSS = () => {
@@ -41,6 +42,7 @@ const NextPage = ({ Component, pageProps }) => {
         <CssBaseline />
         <TopBar />
         <Component {...pageProps} />
+        <Footer />
       </ThemeProvider>
     </>
   );
