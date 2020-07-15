@@ -28,10 +28,6 @@ const NextPage = ({ Component, pageProps }) => {
     <>
       <Head>
         <title>Blog</title>
-        <link
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          rel="stylesheet"
-        />
         <meta
           content="minimum-scale=1, initial-scale=1, width=device-width"
           name="viewport"

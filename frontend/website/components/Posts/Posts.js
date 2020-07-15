@@ -10,7 +10,7 @@ import { AvatarInfoStyles } from '~/components/Posts/styles/Post.styles';
 /* Components */
 import PostItem from '~/components/Posts/PostItem';
 
-const Posts = ({ title }) => {
+const Posts = ({ title, enableViewAll }) => {
   const classes = AvatarInfoStyles();
 
   return (
@@ -19,14 +19,16 @@ const Posts = ({ title }) => {
         <div className={classes.titleWrapper}>
           <h2 className={classes.title}>{title}</h2>
 
-          <Button
-            color="primary"
-            disableElevation
-            size="medium"
-            variant="contained"
-          >
-            View all
-          </Button>
+          {enableViewAll && (
+            <Button
+              color="primary"
+              disableElevation
+              size="medium"
+              variant="contained"
+            >
+              View all
+            </Button>
+          )}
         </div>
 
         <List className={classes.postListWrapper}>
@@ -76,7 +78,12 @@ const Posts = ({ title }) => {
 };
 
 Posts.propTypes = {
+  enableViewAll: PropTypes.bool,
   title: PropTypes.string.isRequired,
+};
+
+Posts.defaultProps = {
+  enableViewAll: false,
 };
 
 export default Posts;

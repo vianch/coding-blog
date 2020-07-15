@@ -5,18 +5,18 @@ import Grid from '@material-ui/core/Grid';
 import { homeStyles } from '~/pages/styles/home.styles';
 
 /* Components */
-import { AvatarInfo, Posts } from '~/components';
+import { Posts } from '~/components';
 
-const Home = () => {
+const Blog = () => {
   const classes = homeStyles();
+
   return (
     <Container className={classes.root} maxWidth="md">
       <Grid className={classes.about} container spacing={0}>
-        <AvatarInfo />
-        <Posts enableViewAll title="Latest Posts" />
+        <Posts title="BLOG" />
       </Grid>
     </Container>
   );
 };
 
-export default Home;
+export default Blog;
