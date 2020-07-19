@@ -7,12 +7,18 @@ import Grid from '@material-ui/core/Grid';
 import { homeStyles } from '~/pages/styles/home.styles';
 
 /* Components */
-import { Posts } from '~/components';
+import { MetaHead, Posts } from '~/components';
 
 const Blog = ({ tag }) => {
   const classes = homeStyles();
   const title = 'Posts tagged';
   const [postTitle, setPostTitle] = useState(title);
+  const metaTags = [
+    {
+      name: 'description',
+      content: `All blog posts tagged as "${tag}".`,
+    },
+  ];
 
   useEffect(() => {
     if (tag) {
@@ -22,6 +28,10 @@ const Blog = ({ tag }) => {
 
   return (
     <Container className={classes.root} maxWidth="md">
+      <MetaHead
+        metaData={metaTags}
+        title={`Blog posts tagged as "${tag}" | Coding Blog`}
+      />
       <Grid className={classes.about} container spacing={0}>
         <Posts title={postTitle} />
       </Grid>

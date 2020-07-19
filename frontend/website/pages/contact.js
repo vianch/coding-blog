@@ -4,11 +4,21 @@ import Grid from '@material-ui/core/Grid';
 /* Styles */
 import { contactStyles } from '~/pages/styles/contact.styles';
 
+/* Components */
+import { MetaHead } from '~/components';
+
 const Contact = () => {
   const classes = contactStyles();
+  const metaTags = [
+    {
+      name: 'description',
+      content: "Don't be shy and leave me a message",
+    },
+  ];
 
   return (
     <Container maxWidth="md">
+      <MetaHead metaData={metaTags} title="Contact | Coding Blog" />
       <Grid alignItems="flex-start" container direction="column">
         <h2 className={classes.title}>
           Don&apos;t be shy, <br />

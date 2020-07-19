@@ -35,7 +35,9 @@
   "dependencies": {
     "@material-ui/core": "4.11.0",
     "dotenv": "^8.2.0",
+    "lodash": "^4.17.19",
     "next": "9.4.4",
+    "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "winston": "^3.3.3"

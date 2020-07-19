@@ -13,6 +13,30 @@ export const blogLinks = {
   },
 };
 
+export const httpCodes = {
+  created: 201,
+  ok: 200,
+  serverError: 500,
+  badRequest: 400,
+  unauthorized: 401,
+  unprocessable: 422,
+  notFoundError: 404,
+};
+
+export const requestStatus = {
+  error: 'error',
+  fetching: 'fetch',
+  success: 'success',
+};
+
+export const httpMethods = {
+  delete: 'delete',
+  get: 'get',
+  patch: 'patch',
+  post: 'post',
+  put: 'put',
+};
+
 export const blogImages = {
   avatar: '/assets/images/avatar.png',
 };

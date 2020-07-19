@@ -4,11 +4,22 @@ import Grid from '@material-ui/core/Grid';
 /* Styles */
 import { aboutStyles } from '~/pages/styles/about.styles';
 
+/* Components */
+import { MetaHead } from '~/components';
+
 const About = () => {
   const classes = aboutStyles();
+  const metaTags = [
+    {
+      name: 'description',
+      content:
+        'Front-end, application Developer and photographer based in Bogotá.',
+    },
+  ];
 
   return (
     <Container maxWidth="md">
+      <MetaHead metaData={metaTags} title="About Me | Coding Blog" />
       <Grid alignItems="flex-start" container direction="column">
         <div className={classes.aboutMeSection}>
           <h2 className={classes.aboutMeTitle}>About me</h2>
