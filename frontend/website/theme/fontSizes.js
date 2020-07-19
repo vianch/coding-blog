@@ -5,5 +5,5 @@ export default {
   medium: '1.6rem',
   large: '2rem',
   xlarge: '2.2rem',
-  xxlarge: '2.4rem',
+  xxlarge: '3.4rem',
 };

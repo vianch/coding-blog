@@ -7,6 +7,10 @@ export const footerStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3, 2),
     marginTop: 'auto',
+    position: 'absolute',
+    bottom: 0,
+    display: 'flex',
+    width: '100%',
     backgroundColor:
       theme.palette.type === 'light'
         ? theme.palette.grey[200]
