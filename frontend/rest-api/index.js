@@ -1,11 +1,12 @@
-const express = require('express');
-const helmet = require('helmet');
+const express = require("express");
+const helmet = require("helmet");
+const path = require("path");
 
-const { restApiEnvironmentSetup } = require('./core/env');
-const { serverLogger } = require('./core/logger');
-const { defaultPort, apiEnvironments } = require('./core/constants');
-const { dataBaseSetup } = require('./core/mongoose');
-const appRoutes = require('./routes/index.js')
+const { restApiEnvironmentSetup } = require("./core/env");
+const { serverLogger } = require("./core/logger");
+const { defaultPort, apiEnvironments } = require("./core/constants");
+const { dataBaseSetup } = require("./core/mongoose");
+const appRoutes = require("./routes/index.js");
 /* Environment configuration */
 restApiEnvironmentSetup();
 
@@ -23,6 +24,8 @@ const app = express();
 
 app.use(helmet());
 app.use(appRoutes);
+app.use("/assets", express.static(path.join(__dirname, "..", "..", "assets")));
+
 app.listen(port, () => {
   serverLogger.info(`rest-api listening on port ${port}`);
 });
