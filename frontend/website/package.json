@@ -1,0 +1,67 @@
+{
+  "name": "coding-blog",
+  "version": "1.0.0",
+  "description": "coding blog",
+  "main": "index.js",
+  "repository": "git@github.com:vianch/coding-blog.git",
+  "author": "Victor <vachavarro@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "NODE_ENV=development RUNNING_LOCAL_INSTANCE=true nodemon server/index.js --exec babel-node --presets @babel/preset-env --watch server/index.js",
+    "build": "NODE_ENV=production next build",
+    "build:config": "babel config -d lib --out-dir .next/config",
+    "build:server": "NODE_ENV=production babel server/index.js --out-dir .next/server && npm run build:config",
+    "coverage": "codecov",
+    "start": "npm run build:server && NODE_ENV=production node .next/server/index.js",
+    "init": "rm -rf ./node_modules && rm -rf package-lock.json && npm install",
+    "test": "npm run test:client",
+    "test:client": "NODE_ENV=test SYSTEM_UNDER_TEST=client JEST_JUNIT_OUTPUT=reports/junit/junit_client.xml jest --ci --reporters=default --reporters=jest-junit --coverageDirectory=reports/coverage/client --coverage --maxWorkers 2 --logHeapUsage"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.json": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@material-ui/core": "4.11.0",
+    "dotenv": "^8.2.0",
+    "lodash": "^4.17.19",
+    "next": "9.4.4",
+    "prop-types": "^15.7.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/node": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "babel-eslint": "^10.1.0",
+    "babel-node": "^0.0.1-security",
+    "babel-plugin-root-import": "^6.5.0",
+    "eslint": "^7.4.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.5",
+    "express": "^4.17.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  }
+}
