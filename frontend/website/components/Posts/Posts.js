@@ -7,14 +7,18 @@ import Divider from '@material-ui/core/Divider';
 /* Styles */
 import { AvatarInfoStyles } from '~/components/Posts/styles/Post.styles';
 
+/* Models */
+import { PostPropTypes } from '~/models';
+
 /* Components */
 import PostItem from '~/components/Posts/PostItem';
 
-const Posts = ({ title, enableViewAll }) => {
+const Posts = ({ posts, title, enableViewAll }) => {
   const classes = AvatarInfoStyles();
 
   return (
     <Grid item xs={12}>
+      <div>{posts}</div>
       <div className={classes.postContainer}>
         <div className={classes.titleWrapper}>
           <h2 className={classes.title}>{title}</h2>
@@ -79,11 +83,13 @@ const Posts = ({ title, enableViewAll }) => {
 
 Posts.propTypes = {
   enableViewAll: PropTypes.bool,
+  posts: PropTypes.arrayOf(PostPropTypes),
   title: PropTypes.string.isRequired,
 };
 
 Posts.defaultProps = {
   enableViewAll: false,
+  posts: [],
 };
 
 export default Posts;
