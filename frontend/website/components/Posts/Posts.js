@@ -18,7 +18,6 @@ const Posts = ({ posts, title, enableViewAll }) => {
 
   return (
     <Grid item xs={12}>
-      <div>{posts}</div>
       <div className={classes.postContainer}>
         <div className={classes.titleWrapper}>
           <h2 className={classes.title}>{title}</h2>
@@ -27,6 +26,7 @@ const Posts = ({ posts, title, enableViewAll }) => {
             <Button
               color="primary"
               disableElevation
+              href="/blog"
               size="medium"
               variant="contained"
             >
@@ -36,45 +36,17 @@ const Posts = ({ posts, title, enableViewAll }) => {
         </div>
 
         <List className={classes.postListWrapper}>
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-git-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-nodejs-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-react-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-nodejs-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-nodejs-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
+          {posts.map((post) => (
+            <div key={`id_${post.id}`}>
+              <PostItem
+                date={`${new Date(post.dateTimestamp * 1000)}`}
+                image={post.thumbnailImageUrl}
+                title={post.title}
+                url={post.urlTitle}
+              />
+              <Divider component="li" variant="inset" />
+            </div>
+          ))}
         </List>
       </div>
     </Grid>

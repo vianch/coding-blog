@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
-
+import get from 'lodash/get';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+
+/* Constants */
+import { httpCodes } from '~/core';
 
 /* Styles */
 import { homeStyles } from '~/pages/styles/home.styles';
@@ -24,7 +27,15 @@ const Home = () => {
   ];
 
   const loadHomeData = () => {
-    homeApi.getHomePostData().then((posts) => setHomePost(posts));
+    homeApi.getHomePostData(5).then((postsResponse) => {
+      let postsData = [];
+
+      if (postsResponse && postsResponse.status === httpCodes.ok) {
+        postsData = get(postsResponse, 'payload.data', []);
+      }
+
+      setHomePost(postsData);
+    });
   };
 
   useEffect(() => {

@@ -21,6 +21,7 @@ export const httpCodes = {
   unauthorized: 401,
   unprocessable: 422,
   notFoundError: 404,
+  notDataAvailable: 412,
 };
 
 export const requestStatus = {
