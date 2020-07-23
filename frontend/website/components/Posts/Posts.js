@@ -5,16 +5,19 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 
 /* Styles */
-import { AvatarInfoStyles } from '~/components/Posts/styles/Post.styles';
+import { HeaderInfoStyles } from '~/components/Posts/styles/Post.styles';
 
 /* Models */
 import { PostPropTypes } from '~/models';
+
+/* Utils */
+import { timeStampToDate } from '~/utils/date.utils';
 
 /* Components */
 import PostItem from '~/components/Posts/PostItem';
 
 const Posts = ({ posts, title, enableViewAll }) => {
-  const classes = AvatarInfoStyles();
+  const classes = HeaderInfoStyles();
 
   return (
     <Grid item xs={12}>
@@ -39,7 +42,7 @@ const Posts = ({ posts, title, enableViewAll }) => {
           {posts.map((post) => (
             <div key={`id_${post.id}`}>
               <PostItem
-                date={`${new Date(post.dateTimestamp * 1000)}`}
+                date={timeStampToDate(post.dateTimestamp)}
                 image={post.thumbnailImageUrl}
                 title={post.title}
                 url={post.urlTitle}

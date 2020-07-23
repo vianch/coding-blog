@@ -65,7 +65,7 @@ const Blog = ({ tag }) => {
           <ErrorContent
             description="There have been no posts in this section yet."
             errorCode={httpCodes.notDataAvailable}
-            title="No post"
+            title={`No posts available by ${tag}`}
           />
         </Grid>
       )}

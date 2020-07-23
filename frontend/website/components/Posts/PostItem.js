@@ -15,7 +15,7 @@ const PostItem = ({ image, title, date, url }) => {
           <img height={25} src={image} />
         </Avatar>
       </ListItemAvatar>
-      <ListItemLink href={url}>
+      <ListItemLink href={`${window.location.origin}/blog/${url}`}>
         <ListItemText primary={title} secondary={date} />
       </ListItemLink>
     </ListItem>

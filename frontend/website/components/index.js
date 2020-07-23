@@ -1,4 +1,4 @@
-export { default as AvatarInfo } from './AvatarInfo/AvatarInfo';
+export { default as HeaderInfo } from './HeaderInfo/HeaderInfo';
 export * from './errors';
 export { default as TopBar } from './TopBar/TopBar';
 export { default as ListItemLink } from './ListItemLink/ListItemLink';

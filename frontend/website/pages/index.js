@@ -13,7 +13,7 @@ import { homeStyles } from '~/pages/styles/home.styles';
 import { homeApi } from '~/services/api';
 
 /* Components */
-import { AvatarInfo, Posts, MetaHead } from '~/components';
+import { HeaderInfo, Posts, MetaHead } from '~/components';
 
 const Home = () => {
   const classes = homeStyles();
@@ -46,7 +46,11 @@ const Home = () => {
     <Container className={classes.root} maxWidth="md">
       <MetaHead metaData={metaTags} title="Coding Blog" />
       <Grid className={classes.about} container spacing={0}>
-        <AvatarInfo />
+        <HeaderInfo
+          subtitle=" A full stack software / application developer and photographer based
+            in Bogotá."
+          title={`Hi, I'm VIANCH. I help people learn software development.`}
+        />
         <Posts enableViewAll posts={homePost} title="Latest Posts" />
       </Grid>
     </Container>

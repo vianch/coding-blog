@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import fontSizes from '~/theme/fontSizes';
 
-export const AvatarInfoStyles = makeStyles(() => ({
+export const HeaderInfoStyles = makeStyles(() => ({
   postContainer: {
     margin: '2.5rem 0',
   },

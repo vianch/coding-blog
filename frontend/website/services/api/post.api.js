@@ -9,7 +9,12 @@ const getBlogByTag = (tag) => {
   return httpGet(endpoints.getBlogPostsByTag(tag));
 };
 
+const getBlogPostByUrlTitle = (urlTitle) => {
+  return httpGet(endpoints.getBlogPostByUrlTitle(urlTitle));
+};
+
 export default {
   getAllBlogPost,
   getBlogByTag,
+  getBlogPostByUrlTitle,
 };
