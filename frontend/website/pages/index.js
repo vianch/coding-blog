@@ -19,6 +19,7 @@ import { HeaderInfo, Posts, MetaHead, ProjectList } from '~/components';
 const Home = () => {
   const classes = homeStyles();
   const [homePost, setHomePost] = useState([]);
+  const [homeProjects, setHomeProjects] = useState([]);
   const metaTags = [
     {
       name: 'description',
@@ -27,7 +28,7 @@ const Home = () => {
     },
   ];
 
-  const loadHomeData = () => {
+  const loadPostsData = () => {
     homeApi.getHomePostData(5).then((postsResponse) => {
       let postsData = [];
 
@@ -39,8 +40,21 @@ const Home = () => {
     });
   };
 
+  const loadProjectsData = () => {
+    homeApi.getProjectsData().then((projectResponse) => {
+      let projectsData = [];
+
+      if (projectResponse && projectResponse.status === httpCodes.ok) {
+        projectsData = get(projectResponse, 'payload.data', []);
+      }
+
+      setHomeProjects(projectsData);
+    });
+  };
+
   useEffect(() => {
-    loadHomeData();
+    loadPostsData();
+    loadProjectsData();
   }, []);
 
   return (
@@ -59,11 +73,17 @@ const Home = () => {
 
       <Container maxWidth="md">
         <Grid className={classes.about} container spacing={0}>
-          <Posts enableViewAll posts={homePost} title="Latest Posts" />
+          {homePost && homePost.length > 0 && (
+            <Posts enableViewAll posts={homePost} title="Latest Posts" />
+          )}
 
-          <Posts enableViewAll posts={homePost} title="Popular Posts" />
+          {homePost && homePost.length > 0 && (
+            <Posts enableViewAll posts={homePost} title="Popular Posts" />
+          )}
 
-          <ProjectList title="Projects" />
+          {homeProjects && homeProjects.length > 0 && (
+            <ProjectList projects={homeProjects} title="Projects" />
+          )}
         </Grid>
       </Container>
     </Container>

@@ -35,15 +35,11 @@ const Contact = () => {
             </li>
             <li className={classes.contactItem}>
               <strong>GitHub</strong>:{' '}
-              <a href="https://github.com/coder-rocket-fuel">
-                Coder Rocket Fuel
-              </a>
+              <a href="https://github.com/vianch">VIANCH</a>
             </li>
             <li className={classes.contactItem}>
               <strong>Twitter</strong>:{' '}
-              <a href="https://twitter.com/CoderRocketFuel">
-                Coder Rocket Fuel Twitter Page
-              </a>
+              <a href="https://twitter.com/vianch_tog">@vianch_tog</a>
             </li>
           </ul>
         </div>

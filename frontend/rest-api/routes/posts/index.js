@@ -1,10 +1,9 @@
 const express = require("express");
 
-const api = require("./api.js");
+const { apiVersionPrefix, postPrefix } = require('../../core/constants');
+const api = require("./posts.api.js");
 
 const app = express.Router();
-const apiVersionPrefix = "/api/v1";
-const postPrefix = "/posts";
 
 app.get(
   `${apiVersionPrefix}${postPrefix}/get-all-blog-posts`,

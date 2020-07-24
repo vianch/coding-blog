@@ -7,7 +7,8 @@ const { restApiEnvironmentSetup } = require("./core/env");
 const { serverLogger } = require("./core/logger");
 const { defaultPort, apiEnvironments } = require("./core/constants");
 const { dataBaseSetup } = require("./core/mongoose");
-const appRoutes = require("./routes/index.js");
+const postsRoutes = require("./routes/posts");
+const projectRoutes = require("./routes/projects");
 
 /* Environment configuration */
 restApiEnvironmentSetup();
@@ -32,7 +33,8 @@ if(isDevelopment) {
   app.use(cors());
 }
 app.use(helmet());
-app.use(appRoutes);
+app.use(postsRoutes);
+app.use(projectRoutes);
 app.use("/assets", express.static(path.join(__dirname, "..", "..", "assets")));
 
 app.listen(port, () => {

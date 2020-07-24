@@ -5,6 +5,11 @@ const getHomePostData = (limit) => {
   return httpGet(endpoints.getNewestPosts(limit));
 };
 
+const getProjectsData = () => {
+  return httpGet(endpoints.getAllProjects());
+};
+
 export default {
   getHomePostData,
+  getProjectsData,
 };
