@@ -14,7 +14,7 @@ import { homeStyles } from '~/pages/styles/home.styles';
 import { homeApi } from '~/services/api';
 
 /* Components */
-import { HeaderInfo, Posts, MetaHead } from '~/components';
+import { HeaderInfo, Posts, MetaHead, ProjectList } from '~/components';
 
 const Home = () => {
   const classes = homeStyles();
@@ -62,6 +62,8 @@ const Home = () => {
           <Posts enableViewAll posts={homePost} title="Latest Posts" />
 
           <Posts enableViewAll posts={homePost} title="Popular Posts" />
+
+          <ProjectList title="Projects" />
         </Grid>
       </Container>
     </Container>
