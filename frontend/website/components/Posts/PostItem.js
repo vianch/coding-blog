@@ -1,15 +1,16 @@
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import PropTypes from 'prop-types';
 
 /* Components */
-import { ListItemLink } from '~/components';
+import { ListItemLink, Tags } from '~/components';
 
-const PostItem = ({ image, title, date, url }) => {
+const PostItem = ({ image, title, date, url, tags }) => {
   return (
-    <ListItem>
+    <ListItem button dense>
       <ListItemAvatar>
         <Avatar>
           <img height={25} src={image} />
@@ -18,6 +19,10 @@ const PostItem = ({ image, title, date, url }) => {
       <ListItemLink href={`${window.location.origin}/blog/${url}`}>
         <ListItemText primary={title} secondary={date} />
       </ListItemLink>
+
+      <ListItemSecondaryAction>
+        <Tags customClass="" tags={tags} />
+      </ListItemSecondaryAction>
     </ListItem>
   );
 };
@@ -25,6 +30,7 @@ const PostItem = ({ image, title, date, url }) => {
 PostItem.propTypes = {
   date: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
 };

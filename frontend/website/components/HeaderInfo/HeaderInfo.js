@@ -8,11 +8,12 @@ import { blogImages } from '~/core';
 /* Styles */
 import { HeaderInfoStyles } from '~/components/HeaderInfo/styles/HeaderInfo.styles';
 
-const HeaderInfo = ({ title, subtitle, image }) => {
+const HeaderInfo = ({ title, subtitle, image, isFullWidth }) => {
   const classes = HeaderInfoStyles();
+  const containerClass = isFullWidth ? classes.headerInfoContainer : '';
 
   return (
-    <Grid item xs={12}>
+    <Grid className={containerClass} item xs={12}>
       <div className={classes.ImageSection}>
         <Hidden only="xs">
           <img height={150} src={image} />
@@ -29,12 +30,14 @@ const HeaderInfo = ({ title, subtitle, image }) => {
 
 HeaderInfo.propTypes = {
   image: PropTypes.string,
+  isFullWidth: PropTypes.bool,
   subtitle: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
 };
 
 HeaderInfo.defaultProps = {
   image: blogImages.avatar,
+  isFullWidth: false,
 };
 
 export default HeaderInfo;

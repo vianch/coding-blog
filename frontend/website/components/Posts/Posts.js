@@ -38,19 +38,22 @@ const Posts = ({ posts, title, enableViewAll }) => {
           )}
         </div>
 
-        <List className={classes.postListWrapper}>
-          {posts.map((post) => (
-            <div key={`id_${post.id}`}>
-              <PostItem
-                date={timeStampToDate(post.dateTimestamp)}
-                image={post.thumbnailImageUrl}
-                title={post.title}
-                url={post.urlTitle}
-              />
-              <Divider component="li" variant="inset" />
-            </div>
-          ))}
-        </List>
+        {posts && posts.length > 0 && (
+          <List className={classes.postListWrapper}>
+            {posts.map((post) => (
+              <div key={`id_${post.id}`}>
+                <PostItem
+                  date={timeStampToDate(post.dateTimestamp)}
+                  image={post.thumbnailImageUrl}
+                  tags={post.tags}
+                  title={post.title}
+                  url={post.urlTitle}
+                />
+                <Divider component="li" variant="inset" />
+              </div>
+            ))}
+          </List>
+        )}
       </div>
     </Grid>
   );

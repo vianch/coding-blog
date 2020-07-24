@@ -17,7 +17,7 @@ const Contact = () => {
   ];
 
   return (
-    <Container maxWidth="md">
+    <Container className={classes.root} maxWidth="md">
       <MetaHead metaData={metaTags} title="Contact | Coding Blog" />
       <Grid alignItems="flex-start" container direction="column">
         <h2 className={classes.title}>

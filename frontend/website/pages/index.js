@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import get from 'lodash/get';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import clsx from 'clsx';
 
 /* Constants */
 import { httpCodes } from '~/core';
@@ -43,16 +44,26 @@ const Home = () => {
   }, []);
 
   return (
-    <Container className={classes.root} maxWidth="md">
+    <Container
+      className={clsx(classes.root, classes.noMargin)}
+      maxWidth={false}
+    >
       <MetaHead metaData={metaTags} title="Coding Blog" />
-      <Grid className={classes.about} container spacing={0}>
-        <HeaderInfo
-          subtitle=" A full stack software / application developer and photographer based
+
+      <HeaderInfo
+        isFullWidth
+        subtitle=" A full stack software / application developer and photographer based
             in Bogotá."
-          title={`Hi, I'm VIANCH. I help people learn software development.`}
-        />
-        <Posts enableViewAll posts={homePost} title="Latest Posts" />
-      </Grid>
+        title={`Hi, I'm VIANCH. I help people learn software development.`}
+      />
+
+      <Container maxWidth="md">
+        <Grid className={classes.about} container spacing={0}>
+          <Posts enableViewAll posts={homePost} title="Latest Posts" />
+
+          <Posts enableViewAll posts={homePost} title="Popular Posts" />
+        </Grid>
+      </Container>
     </Container>
   );
 };

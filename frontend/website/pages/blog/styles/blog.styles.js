@@ -7,6 +7,9 @@ export const blogStyles = makeStyles(() =>
     root: {
       fontSize: fontSizes.medium,
       display: 'flex',
+      height: 'auto',
+      minHeight: 'calc(100vh - 15.2rem)',
+      flexFlow: 'column nowrap',
     },
 
     about: {

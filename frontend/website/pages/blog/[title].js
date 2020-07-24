@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import get from 'lodash/get';
 
@@ -19,7 +18,7 @@ import { httpCodes } from '~/core';
 import { timeStampToDate } from '~/utils/date.utils';
 
 /* Components */
-import { ErrorContent, HeaderInfo, MetaHead } from '~/components';
+import { ErrorContent, HeaderInfo, MetaHead, Tags } from '~/components';
 
 const BlogByTitle = ({ title }) => {
   const classes = blogStyles();
@@ -74,20 +73,7 @@ const BlogByTitle = ({ title }) => {
           />
 
           {postData && postData.tags && (
-            <div className={classes.tagsSection}>
-              {postData.tags.map((tag) => (
-                <Button
-                  key={`id_tag_${tag}`}
-                  color="primary"
-                  disableElevation
-                  href={`/blog/tag/${tag}`}
-                  size="medium"
-                  variant="contained"
-                >
-                  {tag}
-                </Button>
-              ))}
-            </div>
+            <Tags customClass={classes.tagsSection} tags={postData.tags} />
           )}
 
           <div>{parse(postData.markdownContent)}</div>

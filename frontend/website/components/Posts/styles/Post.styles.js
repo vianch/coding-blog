@@ -15,7 +15,7 @@ export const HeaderInfoStyles = makeStyles(() => ({
 
   title: {
     marginRight: '1.5rem',
-    fontSize: fontSizes.xxlarge,
+    fontSize: fontSizes.xlarge,
   },
 
   postListWrapper: {

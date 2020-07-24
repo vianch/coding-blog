@@ -6,6 +6,14 @@ export const homeStyles = makeStyles(() => ({
   root: {
     fontSize: fontSizes.medium,
     display: 'flex',
+    height: 'auto',
+    minHeight: 'calc(100vh - 15.2rem)',
+    flexFlow: 'column nowrap',
+  },
+
+  noMargin: {
+    margin: 0,
+    padding: 0,
   },
 
   about: {

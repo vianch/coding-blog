@@ -2,6 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import fontSizes from '~/theme/fontSizes';
 
 export const contactStyles = makeStyles(() => ({
+  root: {
+    height: 'auto',
+    minHeight: 'calc(100vh - 15.2rem)',
+  },
+
   title: {
     padding: '5rem 1.5rem 2.5rem',
     display: 'flex',
