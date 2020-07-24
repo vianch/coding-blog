@@ -1,10 +1,10 @@
 const moment = require("moment");
 
-const BlogPostModel = require("../models/post.js");
-const { responseHandler } = require("./errorHandler");
+const BlogPostModel = require("../../models/post.js");
+const { responseHandler } = require("../../utils/errorHandler");
 
-const properties = "title urlTitle dateTimestamp tags thumbnailImageUrl";
 const now = moment().unix();
+const properties = "id title urlTitle dateTimestamp tags thumbnailImageUrl markdownContent seoTitleTag seoMetaDescription";
 const dateTimestamp = { $lte: now };
 const sortAsc = { dateTimestamp: -1 };
 

@@ -1,15 +1,28 @@
+import { useState, useEffect } from 'react';
+import parse from 'html-react-parser';
+import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import get from 'lodash/get';
 
 /* Styles */
-import { homeStyles } from '~/pages/styles/home.styles';
+import { blogStyles } from '~/pages/blog/styles/blog.styles';
+
+/* Services */
+import { postApi } from '~/services/api';
+
+/* Core */
+import { httpCodes } from '~/core';
+
+/* Utils */
+import { timeStampToDate } from '~/utils/date.utils';
 
 /* Components */
-import { MetaHead } from '~/components';
+import { ErrorContent, HeaderInfo, MetaHead, Tags } from '~/components';
 
-const BlogByTitle = () => {
-  const classes = homeStyles();
+const BlogByTitle = ({ title }) => {
+  const classes = blogStyles();
+  const [postData, setPostData] = useState(null);
   const metaTags = [
     {
       name: 'description',
@@ -18,51 +31,73 @@ const BlogByTitle = () => {
     },
   ];
 
+  const loadPostData = (urlTitle) => {
+    postApi.getBlogPostByUrlTitle(urlTitle).then((postResponse) => {
+      let responseData = [];
+
+      if (postResponse && postResponse.status === httpCodes.ok) {
+        responseData = get(postResponse, 'payload.data', null);
+
+        if (!responseData) {
+          responseData = get(postResponse, 'payload', []);
+        }
+      }
+
+      setPostData(responseData);
+    });
+  };
+
+  useEffect(() => {
+    if (title) {
+      loadPostData(title);
+    }
+  }, [title]);
+
   return (
     <Container className={classes.root} maxWidth="md">
-      <MetaHead metaData={metaTags} title="MY BLOG POST TITLE" />
-      <Grid className={classes.about} container direction="column" spacing={0}>
-        <h2>MY BLOG POST TITLE GOES HERE</h2>
+      {postData && !postData.notFoundError && (
+        <Grid
+          className={classes.about}
+          container
+          direction="column"
+          spacing={0}
+        >
+          <MetaHead
+            metaData={metaTags}
+            title={get(postData, 'seoTitleTag', '')}
+          />
+          <HeaderInfo
+            image={postData.thumbnailImageUrl}
+            subtitle={timeStampToDate(postData.dateTimestamp)}
+            title={postData.title}
+          />
 
-        <div className="blog-post-top-meta">
-          <span>5/1/2020</span>
+          {postData && postData.tags && (
+            <Tags customClass={classes.tagsSection} tags={postData.tags} />
+          )}
 
-          <div>
-            <Button
-              color="primary"
-              disableElevation
-              size="medium"
-              variant="contained"
-            >
-              Tag 1
-            </Button>
+          <div>{parse(postData.markdownContent)}</div>
+        </Grid>
+      )}
 
-            <Button
-              color="primary"
-              disableElevation
-              size="medium"
-              variant="contained"
-            >
-              Tag 2
-            </Button>
-
-            <Button
-              color="primary"
-              disableElevation
-              size="medium"
-              variant="contained"
-            >
-              Tag 3
-            </Button>
-          </div>
-        </div>
-
-        <div>
-          <p>Blog post content will go here!</p>
-        </div>
-      </Grid>
+      {((postData && (postData.notFoundError || postData.getDataError)) ||
+        (postData && postData.length === 0)) && (
+        <Grid container justify="center">
+          <ErrorContent
+            description="Blog post not found."
+            errorCode={httpCodes.notDataAvailable}
+            title={`No post available for ${title}`}
+          />
+        </Grid>
+      )}
     </Container>
   );
 };
+
+BlogByTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+BlogByTitle.getInitialProps = async ({ query }) =>
+  query && query.title ? { title: query.title } : null;
 
 export default BlogByTitle;

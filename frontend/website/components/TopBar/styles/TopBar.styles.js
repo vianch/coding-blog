@@ -25,7 +25,7 @@ export const topBarStyles = makeStyles(() =>
     mainLink: {
       color: palette.white,
       fontSize: fontSizes.medium,
-      marginLeft: '1rem',
+      marginLeft: '2.5rem',
     },
   }),
 );

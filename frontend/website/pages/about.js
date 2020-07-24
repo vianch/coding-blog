@@ -18,7 +18,7 @@ const About = () => {
   ];
 
   return (
-    <Container maxWidth="md">
+    <Container className={classes.root} maxWidth="md">
       <MetaHead metaData={metaTags} title="About Me | Coding Blog" />
       <Grid alignItems="flex-start" container direction="column">
         <div className={classes.aboutMeSection}>

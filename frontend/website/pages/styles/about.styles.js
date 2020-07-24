@@ -2,6 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import fontSizes from '~/theme/fontSizes';
 
 export const aboutStyles = makeStyles(() => ({
+  root: {
+    height: 'auto',
+    minHeight: 'calc(100vh - 15.2rem)',
+  },
+
   aboutMeSection: {
     margin: '5rem 1.5rem 5rem 1.5rem',
   },

@@ -2,7 +2,7 @@ import fontSizes from '../fontSizes';
 
 export default {
   primary: {
-    fontSize: fontSizes.large,
+    fontSize: fontSizes.medium,
   },
 
   secondary: {

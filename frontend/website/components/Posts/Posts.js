@@ -5,13 +5,19 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 
 /* Styles */
-import { AvatarInfoStyles } from '~/components/Posts/styles/Post.styles';
+import { HeaderInfoStyles } from '~/components/Posts/styles/Post.styles';
+
+/* Models */
+import { PostPropTypes } from '~/models';
+
+/* Utils */
+import { timeStampToDate } from '~/utils/date.utils';
 
 /* Components */
 import PostItem from '~/components/Posts/PostItem';
 
-const Posts = ({ title, enableViewAll }) => {
-  const classes = AvatarInfoStyles();
+const Posts = ({ posts, title, enableViewAll }) => {
+  const classes = HeaderInfoStyles();
 
   return (
     <Grid item xs={12}>
@@ -23,6 +29,7 @@ const Posts = ({ title, enableViewAll }) => {
             <Button
               color="primary"
               disableElevation
+              href="/blog"
               size="medium"
               variant="contained"
             >
@@ -31,47 +38,22 @@ const Posts = ({ title, enableViewAll }) => {
           )}
         </div>
 
-        <List className={classes.postListWrapper}>
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-git-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-nodejs-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-react-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-nodejs-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-
-          <PostItem
-            date="July 20, 2014"
-            image="https://assets.coderrocketfuel.com/coding-blog-nodejs-thumbnail.png"
-            title="Introduction to Git - Background, Installation, and Usage"
-            url="#"
-          />
-          <Divider component="li" variant="inset" />
-        </List>
+        {posts && posts.length > 0 && (
+          <List className={classes.postListWrapper}>
+            {posts.map((post) => (
+              <div key={`id_${post.id}`}>
+                <PostItem
+                  date={timeStampToDate(post.dateTimestamp)}
+                  image={post.thumbnailImageUrl}
+                  tags={post.tags}
+                  title={post.title}
+                  url={post.urlTitle}
+                />
+                <Divider component="li" variant="inset" />
+              </div>
+            ))}
+          </List>
+        )}
       </div>
     </Grid>
   );
@@ -79,11 +61,13 @@ const Posts = ({ title, enableViewAll }) => {
 
 Posts.propTypes = {
   enableViewAll: PropTypes.bool,
+  posts: PropTypes.arrayOf(PostPropTypes),
   title: PropTypes.string.isRequired,
 };
 
 Posts.defaultProps = {
   enableViewAll: false,
+  posts: [],
 };
 
 export default Posts;
