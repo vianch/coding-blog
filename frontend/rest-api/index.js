@@ -1,7 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const path = require("path");
-const cors = require('cors');
+const cors = require("cors");
 
 const { restApiEnvironmentSetup } = require("./core/env");
 const { serverLogger } = require("./core/logger");
@@ -14,22 +14,17 @@ const projectRoutes = require("./routes/projects");
 restApiEnvironmentSetup();
 
 /* Constants */
-const { NODE_ENV, DB_USERNAME, DB_PASSWORD, DB_NAME } = process.env;
+const { NODE_ENV, DB_USERNAME, DB_PASSWORD, DB_NAME, DB_CLUSTER } = process.env;
 const isDevelopment = NODE_ENV === apiEnvironments.DEVELOPMENT;
 
 /* Database configuration */
-dataBaseSetup(
-  DB_USERNAME,
-  DB_PASSWORD,
-  DB_NAME,
-  isDevelopment
-);
+dataBaseSetup(DB_USERNAME, DB_PASSWORD, DB_NAME, DB_CLUSTER, isDevelopment);
 
 /* Express Configuration */
 const port = process.env.SERVER_PORT || defaultPort;
 const app = express();
 
-if(isDevelopment) {
+if (isDevelopment) {
   app.use(cors());
 }
 app.use(helmet());

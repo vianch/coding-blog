@@ -12,8 +12,8 @@ const postPrefix = "/posts";
 const projectsPrefix = "/projects";
 
 // Mongo
-const connectionString = (userName, password, databaseName) =>
-  `mongodb+srv://${userName}:${password}@vianch-coding-blog-clus.igd6l.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
+const connectionString = (userName, password, clusterName, databaseName) =>
+  `mongodb+srv://${userName}:${password}@${clusterName}/${databaseName}?retryWrites=true&w=majority`;
 
 module.exports = {
   apiVersionPrefix,
