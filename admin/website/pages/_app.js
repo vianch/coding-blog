@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -7,9 +7,16 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { materialTheme } from '../theme';
 
 /* Custom components */
-import { Footer, TopBar, CssBaseline } from '../components';
+import {
+  AdminAppBar,
+  CssBaseline,
+  MainContainer,
+  Navigation,
+} from '../components';
 
 const NextPage = ({ Component, pageProps }) => {
+  const [isMobileOpen, setMobileOpen] = useState(false);
+
   const removeServerCSS = () => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
@@ -19,6 +26,10 @@ const NextPage = ({ Component, pageProps }) => {
     }
   };
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(!isMobileOpen);
+  };
+
   useEffect(() => {
     removeServerCSS();
   }, []);
@@ -26,7 +37,7 @@ const NextPage = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>Blog</title>
+        <title>Blog Admin</title>
         <meta
           content="minimum-scale=1, initial-scale=1, width=device-width"
           name="viewport"
@@ -35,9 +46,14 @@ const NextPage = ({ Component, pageProps }) => {
 
       <ThemeProvider theme={materialTheme}>
         <CssBaseline />
-        <TopBar />
-        <Component {...pageProps} />
-        <Footer />
+        <AdminAppBar onDrawerToggle={handleDrawerToggle} />
+        <Navigation
+          mobileOpen={isMobileOpen}
+          onDrawerToggle={handleDrawerToggle}
+        />
+        <MainContainer>
+          <Component {...pageProps} />
+        </MainContainer>
       </ThemeProvider>
     </>
   );

@@ -1,5 +1,4 @@
 root = true
-
 [{src,scripts}/**.{ts,tsx,json,js}]
 end_of_line = crlf
 charset = utf-8

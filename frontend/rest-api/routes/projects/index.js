@@ -10,7 +10,6 @@ app.get(
     (request, response) => {
 
       api.getAllProjects((apiResponse) => {
-        console.log('apiResponse, ', apiResponse);
         response.json(apiResponse);
       });
     }

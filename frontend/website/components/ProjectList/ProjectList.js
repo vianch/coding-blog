@@ -4,6 +4,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import getConfig from "next/dist/next-server/lib/runtime-config";
 
 /* Models */
 import { ProjectPropTypes } from '~/models';
@@ -16,6 +17,8 @@ import { ListItemLink } from '~/components';
 
 const ProjectList = ({ projects, title }) => {
   const classes = projectListStyles();
+  const { publicRuntimeConfig } = getConfig();
+  const { API_BASE_URL } = publicRuntimeConfig;
 
   return (
     <Grid className={classes.root} item xs={12}>
@@ -30,7 +33,7 @@ const ProjectList = ({ projects, title }) => {
               <img
                 alt="git logo"
                 height="25"
-                src="https://assets.coderrocketfuel.com/coding-blog-git-thumbnail.png"
+                src={`${API_BASE_URL}/assets/coding-blog-git-thumbnail.png`}
               />
             </ListItemIcon>
 
