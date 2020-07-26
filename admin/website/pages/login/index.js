@@ -1,12 +1,16 @@
-import { blogImages } from '~/core/constants';
+import Head from 'next/head';
+
+/* Components */
+import { SignInForm } from '~/components';
 
 const Login = () => {
   return (
-    <form id="login-form">
-      <img height={50} src={blogImages.avatar} />
-
-      <h1>Sign In</h1>
-    </form>
+    <>
+      <Head>
+        <title>Login | Admin</title>
+      </Head>
+      <SignInForm onSubmit={() => true} />
+    </>
   );
 };
 

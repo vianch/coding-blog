@@ -1,5 +1,14 @@
+import Head from 'next/head';
+
 const HomeAdmin = () => {
-  return <div>DOG ADMIN</div>;
+  return (
+    <>
+      <Head>
+        <title>Blog Posts | Admin</title>
+      </Head>
+      DOG ADMIN
+    </>
+  );
 };
 
 export default HomeAdmin;

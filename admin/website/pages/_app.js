@@ -16,6 +16,7 @@ import {
 
 const NextPage = ({ Component, pageProps }) => {
   const [isMobileOpen, setMobileOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
 
   const removeServerCSS = () => {
     // Remove the server-side injected CSS.
@@ -31,6 +32,7 @@ const NextPage = ({ Component, pageProps }) => {
   };
 
   useEffect(() => {
+    setIsLoggedIn(false);
     removeServerCSS();
   }, []);
 
@@ -46,14 +48,20 @@ const NextPage = ({ Component, pageProps }) => {
 
       <ThemeProvider theme={materialTheme}>
         <CssBaseline />
-        <AdminAppBar onDrawerToggle={handleDrawerToggle} />
-        <Navigation
-          mobileOpen={isMobileOpen}
-          onDrawerToggle={handleDrawerToggle}
-        />
-        <MainContainer>
-          <Component {...pageProps} />
-        </MainContainer>
+
+        {!isLoggedIn && <Component {...pageProps} />}
+        {isLoggedIn && (
+          <>
+            <AdminAppBar onDrawerToggle={handleDrawerToggle} />
+            <Navigation
+              mobileOpen={isMobileOpen}
+              onDrawerToggle={handleDrawerToggle}
+            />
+            <MainContainer>
+              <Component {...pageProps} />
+            </MainContainer>
+          </>
+        )}
       </ThemeProvider>
     </>
   );
