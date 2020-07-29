@@ -4,7 +4,19 @@ const apiEnvironments = {
   PRODUCTION: "production",
   TEST: "test",
 };
-const defaultPort = 5001;
+
+const whiteList = [
+  "https://localhost:3001",
+  "http://localhost:3001",
+  "https://admin.vianch.com",
+  "http://admin.vianch.com",
+  "https://localhost:3000",
+  "http://localhost:3000",
+  "https://www.vianch.com",
+  "http://www.vianch.com",
+];
+
+const defaultPort = 5555;
 
 // Routes constants
 const apiVersionPrefix = "/api/v1";
@@ -22,4 +34,5 @@ module.exports = {
   defaultPort,
   projectsPrefix,
   connectionString,
+  whiteList,
 };

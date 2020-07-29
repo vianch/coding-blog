@@ -2,11 +2,17 @@ const express = require("express");
 const helmet = require("helmet");
 const path = require("path");
 const cors = require("cors");
+const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
+/* Core */
 const { restApiEnvironmentSetup } = require("./core/env");
 const { serverLogger } = require("./core/logger");
 const { defaultPort, apiEnvironments } = require("./core/constants");
+const corsOptions = require("./core/cors");
 const { dataBaseSetup } = require("./core/mongoose");
+
+/* Routes */
 const postsRoutes = require("./routes/posts");
 const projectRoutes = require("./routes/projects");
 
@@ -24,13 +30,14 @@ dataBaseSetup(DB_USERNAME, DB_PASSWORD, DB_NAME, DB_CLUSTER, isDevelopment);
 const port = process.env.SERVER_PORT || defaultPort;
 const app = express();
 
-if (isDevelopment) {
-  app.use(cors());
-}
+app.use(cors(corsOptions));
 app.use(helmet());
+app.use(bodyParser.json({limit: "50mb"}));
+app.use(bodyParser.urlencoded({ extended: false, limit: "50mb" }));
+app.use(cookieParser());
 app.use(postsRoutes);
 app.use(projectRoutes);
-app.use("/assets", express.static(path.join(__dirname, "..", "..", "assets")));
+app.use("/assets", express.static(path.join(__dirname, "..", "assets")));
 
 app.listen(port, () => {
   serverLogger.info(`rest-api listening on port ${port}`);

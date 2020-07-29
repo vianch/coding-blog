@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import { Provider as StoreProvider, connect } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 /* Theme */
-import { materialTheme } from '../theme';
+import { materialTheme } from '~/theme';
 
 /* Custom components */
 import {
@@ -14,9 +15,13 @@ import {
   Navigation,
 } from '../components';
 
+/* Store */
+import createStore from '~/store/createStore';
+
 const NextPage = ({ Component, pageProps }) => {
   const [isMobileOpen, setMobileOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(null);
+  const store = createStore();
 
   const removeServerCSS = () => {
     // Remove the server-side injected CSS.
@@ -46,23 +51,25 @@ const NextPage = ({ Component, pageProps }) => {
         />
       </Head>
 
-      <ThemeProvider theme={materialTheme}>
-        <CssBaseline />
+      <StoreProvider store={store}>
+        <ThemeProvider theme={materialTheme}>
+          <CssBaseline />
 
-        {!isLoggedIn && <Component {...pageProps} />}
-        {isLoggedIn && (
-          <>
-            <AdminAppBar onDrawerToggle={handleDrawerToggle} />
-            <Navigation
-              mobileOpen={isMobileOpen}
-              onDrawerToggle={handleDrawerToggle}
-            />
-            <MainContainer>
-              <Component {...pageProps} />
-            </MainContainer>
-          </>
-        )}
-      </ThemeProvider>
+          {!isLoggedIn && <Component {...pageProps} />}
+          {isLoggedIn && (
+            <>
+              <AdminAppBar onDrawerToggle={handleDrawerToggle} />
+              <Navigation
+                mobileOpen={isMobileOpen}
+                onDrawerToggle={handleDrawerToggle}
+              />
+              <MainContainer>
+                <Component {...pageProps} />
+              </MainContainer>
+            </>
+          )}
+        </ThemeProvider>
+      </StoreProvider>
     </>
   );
 };
@@ -70,10 +77,10 @@ const NextPage = ({ Component, pageProps }) => {
 NextPage.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.shape({}),
+  store: PropTypes.shape({}).isRequired,
 };
 
 NextPage.defaultProps = {
   pageProps: {},
 };
-
 export default NextPage;
