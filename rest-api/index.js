@@ -13,6 +13,7 @@ const corsOptions = require("./core/cors");
 const { dataBaseSetup } = require("./core/mongoose");
 
 /* Routes */
+const adminRoutes = require("./routes/admin-user");
 const postsRoutes = require("./routes/posts");
 const projectRoutes = require("./routes/projects");
 
@@ -35,6 +36,7 @@ app.use(helmet());
 app.use(bodyParser.json({limit: "50mb"}));
 app.use(bodyParser.urlencoded({ extended: false, limit: "50mb" }));
 app.use(cookieParser());
+app.use(adminRoutes);
 app.use(postsRoutes);
 app.use(projectRoutes);
 app.use("/assets", express.static(path.join(__dirname, "..", "assets")));

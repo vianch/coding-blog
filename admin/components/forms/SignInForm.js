@@ -13,14 +13,22 @@ import { isFormButtonDisabled } from '~/utils/form.utils';
 
 /* Components */
 import { PasswordField, EmailField } from '~/components/inputs';
+import { httpPut } from "~/services/api/rest.api";
+
 
 const SignInForm = ({ onSubmit }) => {
   const [formValues, setFormValues] = useState({ username: '', password: '' });
   const userNameField = 'username';
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     onSubmit(values);
     setFormValues({ username: values.username, password: values.password });
     logger.info('Submit login: ', values, setSubmitting);
+    const response = await httpPut('http://localhost:5000/api/v1/admin/authenticate', {
+      email: 'vachavarro@gmail.com',
+      password: 'testtest'
+    });
+
+    console.log('response: ', response);
   };
 
   const handleChange = ({ target }) => {

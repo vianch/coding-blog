@@ -1,8 +1,13 @@
 const { serverLogger } = require('../core/logger');
 
+const routeErrorHandler = (message, response) => {
+  serverLogger.error(message);
+  response.json({success: false})
+};
+
 const errorHandler = (error, callback) => {
   serverLogger.error(error);
-  callback({ getDataError: true });
+  callback({ getDataError: true, success: false });
 };
 
 const responseHandler = (error, data, callback) => {
@@ -14,6 +19,7 @@ const responseHandler = (error, data, callback) => {
 };
 
 module.exports = {
+  routeErrorHandler,
   errorHandler,
   responseHandler,
 };
