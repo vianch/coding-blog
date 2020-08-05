@@ -19,18 +19,45 @@ const updateUser = (user, callback) => {
 };
 
 const loginAdminUser = (email, password, callback) => {
-  AdminUserModel.findOne({ email: email }).exec((error, user) => {
+  AdminUserModel.findOne({ email }).exec((error, user) => {
     if (error || !user) {
-      return errorHandler(error, callback);
+      return errorHandler(error || `No user`, callback);
     } else {
       user.comparePassword(password, user.password, (matchError, isMatch) => {
-        if (matchError || !isMatch) {
-          return errorHandler(error, callback);
+        let errorMessage = matchError ? matchError : !isMatch ? `No match password for ${email}` : null;
+
+        if (errorMessage) {
+          return errorHandler(errorMessage, callback);
         } else {
           updateUser(user, callback);
         }
       });
     }
+  });
+};
+
+const authenticateAdminUser = (userId, authToken, callback) => {
+  AdminUserModel.findOne({ id: userId }).exec((error, user) => {
+    let errorMessage = null;
+    const timeStampExpired = moment().unix() > user.authTokenExpiresTimestamp
+
+    if (error) {
+      errorMessage = error
+    }
+
+    if (!user) {
+      errorMessage = `No user response for ${userId}`;
+    }
+
+    if (authToken !== user.authToken) {
+      errorMessage = `Token doesn't match`;
+    }
+
+    if (timeStampExpired) {
+      errorMessage = `Token expired`;
+    }
+
+    responseHandler(errorMessage, user, callback);
   });
 };
 
