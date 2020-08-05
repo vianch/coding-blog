@@ -8,7 +8,7 @@ const api = require('./admin-user.api.js');
 const app = express.Router();
 
 app.put(
-  `${apiVersionPrefix}${adminPrefix}/authenticate`,
+  `${apiVersionPrefix}${adminPrefix}/login`,
   (request, response) => {
         const {email, password} = get(request, 'body', { email: null, password: null});
 

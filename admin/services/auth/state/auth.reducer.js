@@ -25,7 +25,7 @@ const authReducer = (state = initialState, action) => {
         signIn: {
           error: null,
           state: requestStatus.success,
-          data: action.payload,
+          data: action.payload.data,
         }
       }
 
@@ -33,7 +33,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         signIn: {
-          error: action.payload,
+          error: action.payload.data,
           state: requestStatus.error,
           data: null
         },

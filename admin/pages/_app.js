@@ -77,10 +77,11 @@ const NextPage = ({ Component, pageProps }) => {
 NextPage.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.shape({}),
-  store: PropTypes.shape({}).isRequired,
+  store: PropTypes.shape({}),
 };
 
 NextPage.defaultProps = {
   pageProps: {},
+  store: {},
 };
 export default NextPage;
