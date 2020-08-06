@@ -63,4 +63,5 @@ const authenticateAdminUser = (userId, authToken, callback) => {
 
 module.exports = {
   loginAdminUser,
+  authenticateAdminUser,
 }

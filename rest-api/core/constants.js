@@ -7,6 +7,8 @@ const apiEnvironments = {
 
 const productionAdminUrl = 'http://admin.vianch.com';
 
+const loginCacheName = 'loginUser';
+
 const whiteList = [
   "https://localhost:3001",
   "http://localhost:3001",
