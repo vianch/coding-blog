@@ -5,11 +5,15 @@ const apiEnvironments = {
   TEST: "test",
 };
 
+const productionAdminUrl = 'http://admin.vianch.com';
+
+const loginCacheName = 'loginUser';
+
 const whiteList = [
   "https://localhost:3001",
   "http://localhost:3001",
   "https://admin.vianch.com",
-  "http://admin.vianch.com",
+  productionAdminUrl,
   "https://localhost:3000",
   "http://localhost:3000",
   "http://localhost:5000",
@@ -37,6 +41,8 @@ module.exports = {
   apiEnvironments,
   defaultPort,
   projectsPrefix,
+  productionAdminUrl,
   connectionString,
   whiteList,
+  loginCacheName
 };

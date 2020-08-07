@@ -12,17 +12,18 @@ export const restApi = axios.create({
   headers: {
     'X-CB-Platform': 'web',
     'X-CB-Retailer': 'vianch',
+    'Access-Control-Allow-Credentials': 'true',
   },
 });
 
-export const httpGet = async (url, headers = null) =>
-  httpRequest({ api: restApi, headers, method: httpMethods.get, url });
+export const httpGet = async (url, headers = null, withCredentials = false) =>
+  httpRequest({ api: restApi, headers, method: httpMethods.get, url, withCredentials });
 
-export const httpPost = async (url, body, headers = null) =>
-  httpRequest({ api: restApi, headers, method: httpMethods.post, url, body });
+export const httpPost = async (url, body, headers = null, withCredentials = false) =>
+  httpRequest({ api: restApi, headers, method: httpMethods.post, url, body, withCredentials });
 
-export const httpPut = async (url, body, headers = null) =>
-  httpRequest({ api: restApi, headers, method: httpMethods.put, url, body });
+export const httpPut = async (url, body, headers = null, withCredentials = false) =>
+  httpRequest({ api: restApi, headers, method: httpMethods.put, url, body, withCredentials });
 
 export const httpPatch = async (url, body, headers = null) =>
   httpRequest({ api: restApi, headers, method: httpMethods.patch, url, body });

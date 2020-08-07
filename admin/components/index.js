@@ -5,3 +5,4 @@ export { default as ListItemLink } from './ListItemLink/ListItemLink';
 export { default as MainContainer } from './MainContainer/MainContainer';
 export * from './inputs';
 export * from './forms';
+export * from './providers';

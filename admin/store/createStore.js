@@ -3,6 +3,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { logger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 import getConfig from 'next/config';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 /* Config */
 import { environments, logs } from '~/config/constants';
@@ -27,11 +29,15 @@ const createEnhancer = () => {
   return enhancer;
 };
 
-const configureStore = (initialState = {}) => {
-  const enhancer = createEnhancer();
-  const rootReducer = (state, action) => reducer(state, action);
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+const enhancer = createEnhancer();
+const rootReducer = (state, action) => reducer(state, action);
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-  return createStore(rootReducer, initialState, enhancer);
-};
+const store = createStore(persistedReducer, {}, enhancer);
+const persistor = persistStore(store);
 
-export default configureStore;
+export default { store, persistor };

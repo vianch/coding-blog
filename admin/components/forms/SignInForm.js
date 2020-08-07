@@ -3,10 +3,10 @@ import { Formik, Form } from 'formik';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 
 /* Core */
 import { blogImages } from '~/core/constants';
-import { logger } from '~/config/logger';
 
 /* Utils */
 import { isFormButtonDisabled } from '~/utils/form.utils';
@@ -17,25 +17,21 @@ import { httpPut } from "~/services/api/rest.api";
 
 
 const SignInForm = ({ onSubmit }) => {
-  const [formValues, setFormValues] = useState({ username: '', password: '' });
-  const userNameField = 'username';
-  const handleSubmit = async (values, { setSubmitting }) => {
-    onSubmit(values);
-    setFormValues({ username: values.username, password: values.password });
-    logger.info('Submit login: ', values, setSubmitting);
-    const response = await httpPut('http://localhost:5000/api/v1/admin/authenticate', {
-      email: 'vachavarro@gmail.com',
-      password: 'testtest'
-    });
+  const [formValues, setFormValues] = useState({ email: '', password: '' });
+  const dispatch = useDispatch();
+  const emailField = 'email';
 
-    console.log('response: ', response);
+  const handleSubmit = async (values, { setSubmitting }) => {
+    setSubmitting(true);
+    setFormValues(values);
+    await onSubmit(values);
+    setSubmitting(false);
   };
 
   const handleChange = ({ target }) => {
-    if (target.name === userNameField) {
-      setFormValues({ username: target.value });
+    if (target.name === emailField) {
+      setFormValues({ email: target.value });
     }
-    logger.info('Onchange login: ', target);
   };
 
   return (
@@ -51,7 +47,7 @@ const SignInForm = ({ onSubmit }) => {
             errors={errors}
             id="sign-in-email-field"
             label="Email"
-            name={userNameField}
+            name={emailField}
             touched={touched}
           />
 

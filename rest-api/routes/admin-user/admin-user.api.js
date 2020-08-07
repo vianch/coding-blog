@@ -1,5 +1,6 @@
 
 const moment = require("moment");
+const get = require('lodash/get');
 
 const AdminUserModel = require("../../models/admin-user.js");
 const { errorHandler, responseHandler } = require("../../utils/errorHandler");
@@ -19,13 +20,15 @@ const updateUser = (user, callback) => {
 };
 
 const loginAdminUser = (email, password, callback) => {
-  AdminUserModel.findOne({ email: email }).exec((error, user) => {
+  AdminUserModel.findOne({ email }).exec((error, user) => {
     if (error || !user) {
-      return errorHandler(error, callback);
+      return errorHandler(error || `No user`, callback);
     } else {
       user.comparePassword(password, user.password, (matchError, isMatch) => {
-        if (matchError || !isMatch) {
-          return errorHandler(error, callback);
+        let errorMessage = matchError ? matchError : !isMatch ? `No match password for ${email}` : null;
+
+        if (errorMessage) {
+          return errorHandler(errorMessage, callback);
         } else {
           updateUser(user, callback);
         }
@@ -34,6 +37,47 @@ const loginAdminUser = (email, password, callback) => {
   });
 };
 
+const authenticateAdminUser = (userId, authToken, callback) => {
+  AdminUserModel.findOne({ id: userId }).exec((error, user) => {
+    let errorMessage = null;
+    let userData = {};
+    const timeStampExpired = moment().unix() > user.authTokenExpiresTimestamp
+    const userId = get(user, 'id');
+
+    if (error) {
+      errorMessage = error
+    }
+
+    if (!user) {
+      errorMessage = `No user response for ${userId}`;
+    }
+
+    if (authToken !== user.authToken) {
+      errorMessage = `Token doesn't match`;
+    }
+
+    if (timeStampExpired) {
+      errorMessage = `Token expired`;
+    }
+
+    if (!userId) {
+      errorMessage = 'No user data'
+    }
+
+    if (userId) {
+      userData = {
+        id: user.id,
+        authToken: user.authToken,
+        authTokenExpiresTimestamp: user.authTokenExpiresTimestamp,
+      }
+    }
+
+    return responseHandler(errorMessage, userData, callback);
+
+  });
+};
+
 module.exports = {
   loginAdminUser,
+  authenticateAdminUser,
 }
