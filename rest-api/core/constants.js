@@ -44,4 +44,5 @@ module.exports = {
   productionAdminUrl,
   connectionString,
   whiteList,
+  loginCacheName
 };

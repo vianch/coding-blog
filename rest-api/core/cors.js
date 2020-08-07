@@ -3,7 +3,7 @@ const { serverLogger } = require("./logger");
 
 const isInWhiteList = origin => whiteList.indexOf(origin) !== -1;
 const corsOptions = {
-  origin: function (origin, callback) {
+  origin: (origin, callback) => {
     if (origin) {
       if(isInWhiteList(origin)) {
         callback(null, true)
@@ -13,8 +13,11 @@ const corsOptions = {
         serverLogger.error(errorMessage);
         callback(new Error(errorMessage))
       }
+    } else {
+      callback(null, true);
     }
-  }
+  },
+  credentials: true
 };
 
 module.exports = corsOptions;

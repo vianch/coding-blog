@@ -13,14 +13,16 @@ const httpRequest = async ({
   method,
   query,
   url,
+  withCredentials = false,
 }) => {
-  let resp = { success: false };
+  let resp;
   const params = omitBy(query, (value) => isNil(value));
 
   try {
     const response = await api({
       data: body,
       headers: merge({}, api.defaults.headers, headers),
+      withCredentials,
       method,
       params,
       url,
