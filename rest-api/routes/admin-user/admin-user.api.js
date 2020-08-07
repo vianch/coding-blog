@@ -1,5 +1,6 @@
 
 const moment = require("moment");
+const get = require('lodash/get');
 
 const AdminUserModel = require("../../models/admin-user.js");
 const { errorHandler, responseHandler } = require("../../utils/errorHandler");
@@ -39,7 +40,9 @@ const loginAdminUser = (email, password, callback) => {
 const authenticateAdminUser = (userId, authToken, callback) => {
   AdminUserModel.findOne({ id: userId }).exec((error, user) => {
     let errorMessage = null;
+    let userData = {};
     const timeStampExpired = moment().unix() > user.authTokenExpiresTimestamp
+    const userId = get(user, 'id');
 
     if (error) {
       errorMessage = error
@@ -57,7 +60,20 @@ const authenticateAdminUser = (userId, authToken, callback) => {
       errorMessage = `Token expired`;
     }
 
-    responseHandler(errorMessage, user, callback);
+    if (!userId) {
+      errorMessage = 'No user data'
+    }
+
+    if (userId) {
+      userData = {
+        id: user.id,
+        authToken: user.authToken,
+        authTokenExpiresTimestamp: user.authTokenExpiresTimestamp,
+      }
+    }
+
+    return responseHandler(errorMessage, userData, callback);
+
   });
 };
 

@@ -10,50 +10,34 @@ import authActions from '../../services/auth/state/auth.actions';
 import { redirectHomePage } from "~/utils/router.utils";
 
 /* Components */
-import { SignInForm } from '~/components';
-import authApi from "~/services/auth/auth.api";
+import { SignInForm, useIsAuthenticated } from '~/components';
 
-const Login = ({cookie}) => {
+const Login = () => {
   const dispatch = useDispatch();
-
+  const isAlreadyLoggedIn = useIsAuthenticated();
   const handleSubmit = async values => {
     const response = await dispatch(authActions.logIn(values));
     const isLoginSuccess = get(response, 'payload.success', false);
 
     if (isLoginSuccess) {
-      redirectHomePage();
+     redirectHomePage();
     }
 
     return response;
   };
 
-  const loadAuth = () => {
-    authApi.requestAuthentication(cookie).then(response => {
-      // console.log('AUTH Response: ', response);
-    });
-
-  }
-
   useEffect(() => {
-    loadAuth();
-  }, []);
+    redirectHomePage();
+  }, [isAlreadyLoggedIn]);
 
   return (
     <>
       <Head>
         <title>Login | Admin</title>
       </Head>
-      <SignInForm onSubmit={handleSubmit} />
+      {!isAlreadyLoggedIn && <SignInForm onSubmit={handleSubmit} />}
     </>
   );
-};
-
-Login.getInitialProps = (props) => {
-  const cookie = get(props, 'req.headers.cookie', 'SIN COOKIE');
-
-  return {
-    cookie
-  }
 };
 
 export default Login;

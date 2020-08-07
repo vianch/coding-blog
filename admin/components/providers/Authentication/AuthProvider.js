@@ -1,18 +1,30 @@
-import { createContext, useState } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import get from 'lodash/get';
 
-export const AuthProvider = ({ children, authenticated }) => {
-  const [isAuthenticated, setAuthenticated] = useState(authenticated);
-  const AuthContext = createContext({
-    isAuthenticated: false,
-    setAuthenticated: () => {}
-  });
+// Context
+import { AuthContext } from '~/components/providers/Authentication/Auth.context';
 
+const AuthProvider = ({ children, authenticatedData, authenticated }) => {
+  const [cookieData, setCookieData] = useState({});
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (get(authenticatedData, 'id')) {
+      setCookieData(authenticatedData);
+      setIsAuthenticated(authenticated);
+    } else {
+      setIsAuthenticated(false);
+    }
+  }, [authenticatedData, authenticated]);
 
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
-        setAuthenticated
+        cookieData,
+        setCookieData,
+        setIsAuthenticated,
       }}
     >
       {children}
@@ -20,10 +32,18 @@ export const AuthProvider = ({ children, authenticated }) => {
   );
 };
 
-export function useAuthentication() {
-  const context = React.useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
+AuthProvider.propTypes = {
+  authenticated: PropTypes.bool,
+  authenticatedData: PropTypes.shape({
+    id: PropTypes.string,
+    authToken: PropTypes.string,
+    authTokenExpiresTimestamp: PropTypes.number,
+  }),
+  children: PropTypes.node.isRequired,
+};
+
+AuthProvider.defaultProps = {
+  authenticatedData: {},
+  authenticated: false,
 }
+export default AuthProvider;

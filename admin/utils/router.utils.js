@@ -1,3 +1,5 @@
+import Router from 'next/router';
+
 export const redirectHomePage = () => {
-  window.location.href = "/";
+  Router.replace("/", "/?loggedIn", { shallow: true });
 };
