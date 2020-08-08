@@ -33,8 +33,6 @@ const logIn = credentials => {
     const serviceResponse = get(response, 'payload.success');
     const serviceResponsePayLoad = get(response, 'payload', {});
 
-    console.log('RESPONSE1: ',response);
-
     dispatch(resetLoginFailure());
 
     if (callResponse && serviceResponse ) {
@@ -46,8 +44,15 @@ const logIn = credentials => {
   };
 };
 
+const logOut = () => {
+  return async dispatch => {
+    const response = await authApi.requestLogOut();
+  };
+};
+
 export default {
   logIn,
+  logOut,
   loginSuccess,
   signOutSuccess,
   loginFailure,

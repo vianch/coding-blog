@@ -3,7 +3,7 @@ const get = require('lodash/get');
 
 const { apiVersionPrefix, adminPrefix, loginCacheName } = require('../../core/constants');
 const { cookieSettings } = require('../../utils/cookies.utils');
-const { routeErrorHandler } = require("../../utils/errorHandler");
+const { routeErrorHandler, errorHandler } = require("../../utils/errorHandler");
 
 const api = require('./admin-user.api.js');
 const app = express.Router();
@@ -53,5 +53,12 @@ app.get(
       });
     }
 });
+
+app.put(`${apiVersionPrefix}${adminPrefix}/logout`, (request, response) => {
+  const authSuccess = get(request, 'locals.authSuccess');
+  if(!authSuccess) {
+    routeErrorHandler('No auth success', response)
+  }
+})
 
 module.exports = app;

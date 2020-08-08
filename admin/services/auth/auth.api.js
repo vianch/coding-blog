@@ -2,7 +2,7 @@ import { httpGet, httpPut } from "~/services/api/rest.api";
 import { endpoints } from "~/services/api/constants";
 
 const requestLogin = async credentials => {
-  return await httpPut(
+  return httpPut(
     endpoints.login(),
     credentials,
     {},
@@ -16,14 +16,19 @@ const requestAuthentication = async cookie => {
     headers: cookie,
   };
 
-  return await httpGet(
+  return httpGet(
     endpoints.authentication(),
     requestHeaders,
     true,
   );
 };
 
+const requestLogOut = async () => {
+  return httpPut(endpoints.logout());
+};
+
 export default {
   requestLogin,
   requestAuthentication,
+  requestLogOut,
 }

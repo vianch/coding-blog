@@ -15,6 +15,7 @@ import { SignInForm, useIsAuthenticated } from '~/components';
 const Login = () => {
   const dispatch = useDispatch();
   const isAlreadyLoggedIn = useIsAuthenticated();
+
   const handleSubmit = async values => {
     const response = await dispatch(authActions.logIn(values));
     const isLoginSuccess = get(response, 'payload.success', false);
@@ -27,7 +28,9 @@ const Login = () => {
   };
 
   useEffect(() => {
-    redirectHomePage();
+    if(isAlreadyLoggedIn) {
+      redirectHomePage();
+    }
   }, [isAlreadyLoggedIn]);
 
   return (
