@@ -6,7 +6,13 @@ const HomeAdmin = () => {
       <Head>
         <title>Blog Posts | Admin</title>
       </Head>
-      DOG ADMIN
+      <div>
+        <h2>
+          Blog posts (99)
+        </h2>
+
+
+      </div>
     </>
   );
 };
