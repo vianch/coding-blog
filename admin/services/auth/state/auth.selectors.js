@@ -8,18 +8,25 @@ const selectSignInStatus = createSelector(selectAuthData, authData =>
 );
 
 const isLoggedIn = (state, cacheData) => {
-  const logInStateData= selectSignInStatus(state);
+  const logInStateData = selectSignInStatus(state);
 
   const stateAuthToken = get(logInStateData, 'data.authToken');
   const stateUserId = get(logInStateData, 'data.userId');
   const cookieAuthToken = get(cacheData, 'authToken');
   const cookieUserId = get(cacheData, 'id');
 
-  return stateAuthToken === cookieAuthToken && stateUserId === cookieUserId;
-}
+  return (
+    stateAuthToken &&
+    cookieAuthToken &&
+    stateUserId &&
+    cookieUserId &&
+    stateAuthToken === cookieAuthToken &&
+    stateUserId === cookieUserId
+  );
+};
 
 export default {
   selectAuthData,
   selectSignInStatus,
   isLoggedIn,
-}
+};

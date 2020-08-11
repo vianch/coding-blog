@@ -10,6 +10,7 @@ import { navigationStyles } from '~/components/Navigation/styles/Navigation.styl
 /* Components */
 import DrawerContent from '~/components/Navigation/DrawerContent';
 import authActions from "~/services/auth/state/auth.actions";
+import { redirectToLoginPage } from "~/utils/router.utils";
 
 export const Navigation = ({ mobileOpen, onDrawerToggle }) => {
   const classes = navigationStyles();
@@ -18,6 +19,9 @@ export const Navigation = ({ mobileOpen, onDrawerToggle }) => {
 
   const handleLogOut = async () => {
     const response = await dispatch(authActions.logOut());
+    if (response) {
+      redirectToLoginPage();
+    }
   };
 
   return (

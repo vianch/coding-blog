@@ -3,6 +3,7 @@ import get from 'lodash/get';
 import { actionTypes } from "~/services/auth/constasnts";
 import authApi from '../auth.api';
 import { logger } from '~/config/logger';
+import { deleteCookies } from "~/utils/cookie.utils";
 
 // ACTION CREATORS
 const loginSuccess = authInfo => ({
@@ -38,7 +39,7 @@ const logIn = credentials => {
     if (callResponse && serviceResponse ) {
       return dispatch(loginSuccess(serviceResponsePayLoad));
     } else  {
-      logger.error(`Login fail.`);
+      logger.warn(`Login fail.`);
       return dispatch(loginFailure(serviceResponsePayLoad));
     }
   };
@@ -47,6 +48,19 @@ const logIn = credentials => {
 const logOut = () => {
   return async dispatch => {
     const response = await authApi.requestLogOut();
+    const callResponse = get(response, 'success');
+    const serviceResponse = get(response, 'payload.success');
+
+    if (callResponse && serviceResponse ) {
+      deleteCookies();
+      dispatch(signOutSuccess());
+      return true;
+    } else {
+      const errorResponse = `Logout fail.`;
+      logger.error(errorResponse);
+      dispatch(loginFailure(errorResponse))
+      return false;
+    }
   };
 };
 

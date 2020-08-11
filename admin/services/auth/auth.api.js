@@ -24,7 +24,7 @@ const requestAuthentication = async cookie => {
 };
 
 const requestLogOut = async () => {
-  return httpPut(endpoints.logout());
+  return httpPut(endpoints.logout(), {}, null, true);
 };
 
 export default {

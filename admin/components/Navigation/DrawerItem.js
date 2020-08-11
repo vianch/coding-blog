@@ -6,7 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemLink from '~/components/ListItemLink/ListItemLink';
 
-// TODO: create a prop on click for links with events
 const DrawerItem = ({ name, link, DrawerItemIcon, onClick }) => {
   return (
     <ListItem button>

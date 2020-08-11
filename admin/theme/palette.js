@@ -10,4 +10,5 @@ export default {
   veryLightGray: '#f3f3f3',
   white: '#FFFFFF',
   facebookBlueColor: '#3B52A6',
+  red: '#F44336',
 };
