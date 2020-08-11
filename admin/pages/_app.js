@@ -22,13 +22,16 @@ import {
 import { authSelectors } from '~/services/auth';
 import authApi from '~/services/auth/auth.api';
 
+/* Utils */
+import { redirectToLoginPage } from '~/utils/router.utils';
+
 /* Store */
 import createStore from '~/store/createStore';
 
 const NextPage = ({ Component, pageProps, cookie }) => {
   const [isMobileOpen, setMobileOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [cookieData, setCookieData] = useState({});
 
   const removeServerCSS = () => {
@@ -51,6 +54,15 @@ const NextPage = ({ Component, pageProps, cookie }) => {
     );
 
     setIsLoggedIn(shouldLoggedIn);
+
+    if (!shouldLoggedIn) {
+      redirectToLoginPage().then(() => {
+        setIsLoading(false);
+      });
+    } else {
+      setIsLoading(false);
+    }
+
   };
 
   const loadAuth = () => {
@@ -58,20 +70,18 @@ const NextPage = ({ Component, pageProps, cookie }) => {
       const apiResponse = get(response, 'success');
       const withCacheData = get(response, 'payload.success');
 
-      if (apiResponse && withCacheData) {
-        const cacheResponse = get(response, 'payload.data');
-        setCookieData(cacheResponse);
-        seLoggedInState(cacheResponse);
-      }
-
-      setIsLoading(false);
+      const cacheResponse =
+        apiResponse && withCacheData ? get(response, 'payload.data') : {};
+      setCookieData(cacheResponse);
+      seLoggedInState(cacheResponse);
     });
   };
+
   useEffect(() => {
     setIsLoading(true);
     loadAuth();
     removeServerCSS();
-  }, []);
+  }, [cookie, Component]);
 
   return (
     <>

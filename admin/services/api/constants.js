@@ -5,4 +5,5 @@ const adminPrefix = "/admin";
 export const endpoints = {
   login: () => `${apiVersionPrefix}${adminPrefix}/login`,
   authentication: () => `${apiVersionPrefix}${adminPrefix}/authenticate`,
+  logout: () => `${apiVersionPrefix}${adminPrefix}/logout`,
 };

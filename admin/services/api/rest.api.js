@@ -17,13 +17,43 @@ export const restApi = axios.create({
 });
 
 export const httpGet = async (url, headers = null, withCredentials = false) =>
-  httpRequest({ api: restApi, headers, method: httpMethods.get, url, withCredentials });
+  httpRequest({
+    api: restApi,
+    headers,
+    method: httpMethods.get,
+    url,
+    withCredentials,
+  });
 
-export const httpPost = async (url, body, headers = null, withCredentials = false) =>
-  httpRequest({ api: restApi, headers, method: httpMethods.post, url, body, withCredentials });
+export const httpPost = async (
+  url,
+  body,
+  headers = null,
+  withCredentials = false,
+) =>
+  httpRequest({
+    api: restApi,
+    headers,
+    method: httpMethods.post,
+    url,
+    body,
+    withCredentials,
+  });
 
-export const httpPut = async (url, body, headers = null, withCredentials = false) =>
-  httpRequest({ api: restApi, headers, method: httpMethods.put, url, body, withCredentials });
+export const httpPut = async (
+  url,
+  body,
+  headers = null,
+  withCredentials = false,
+) =>
+  httpRequest({
+    api: restApi,
+    headers,
+    method: httpMethods.put,
+    url,
+    body,
+    withCredentials,
+  });
 
 export const httpPatch = async (url, body, headers = null) =>
   httpRequest({ api: restApi, headers, method: httpMethods.patch, url, body });

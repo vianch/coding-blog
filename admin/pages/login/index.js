@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import authActions from '../../services/auth/state/auth.actions';
 
 /* Utils */
-import { redirectHomePage } from "~/utils/router.utils";
+import { redirectHomePage } from '~/utils/router.utils';
 
 /* Components */
 import { SignInForm, useIsAuthenticated } from '~/components';
@@ -15,19 +15,22 @@ import { SignInForm, useIsAuthenticated } from '~/components';
 const Login = () => {
   const dispatch = useDispatch();
   const isAlreadyLoggedIn = useIsAuthenticated();
+
   const handleSubmit = async values => {
     const response = await dispatch(authActions.logIn(values));
     const isLoginSuccess = get(response, 'payload.success', false);
 
     if (isLoginSuccess) {
-     redirectHomePage();
+      redirectHomePage();
     }
 
     return response;
   };
 
   useEffect(() => {
-    redirectHomePage();
+    if (isAlreadyLoggedIn) {
+      redirectHomePage();
+    }
   }, [isAlreadyLoggedIn]);
 
   return (
@@ -35,7 +38,9 @@ const Login = () => {
       <Head>
         <title>Login | Admin</title>
       </Head>
-      {!isAlreadyLoggedIn && <SignInForm onSubmit={handleSubmit} />}
+      {!isAlreadyLoggedIn && (
+        <SignInForm onSubmit={handleSubmit} />
+      )}
     </>
   );
 };

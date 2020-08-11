@@ -39,13 +39,14 @@ export const blogUserLinks = [
     link: '/preferences',
     icon: SettingsIcon,
   },
-  {
+];
+
+export const logOutLink =  {
     id: 6,
     name: 'Log Out',
     link: 'logout',
     icon: ExitToAppIcon,
-  },
-];
+  };
 
 export const httpCodes = {
   created: 201,

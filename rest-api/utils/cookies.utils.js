@@ -1,6 +1,7 @@
 const tldjs = require("tldjs")
+const get = require('lodash/get');
 
-const { productionAdminUrl, apiEnvironments } = require("../core/constants");
+const { productionAdminUrl, apiEnvironments, loginCacheName } = require("../core/constants");
 
 const cookieSettings = (authTokenExpiresTimestamp) => {
   const isProduction = process.env.NODE_ENV === apiEnvironments.PRODUCTION;
@@ -15,6 +16,20 @@ const cookieSettings = (authTokenExpiresTimestamp) => {
   });
 }
 
+const getCookeData = request => {
+  let cookies = get(request, `cookies.${loginCacheName}`);
+  cookies = cookies ? cookies.split('&') : null;
+
+  const authUserId = cookies && cookies.length > 0 ? cookies[0] : null;
+  const authToken = cookies && cookies.length > 0 ? cookies[1] : null;
+
+  return {
+    authUserId,
+    authToken,
+  };
+};
+
 module.exports = {
   cookieSettings,
+  getCookeData,
 };
