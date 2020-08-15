@@ -73,6 +73,11 @@ export const httpMethods = {
   put: 'put',
 };
 
+export const oderTypes = {
+  ascendant: 'asc',
+  descent: 'des',
+}
+
 export const blogImages = {
   avatar: '/assets/images/avatar.png',
 };

@@ -18,6 +18,12 @@ const whiteList = [
   "http://localhost:3000",
   "http://localhost:5000",
   "https://localhost:5000",
+  "http://192.168.100.128:3001",
+  "https://192.168.100.128:3001",
+  "http://192.168.100.128:3000",
+  "https://192.168.100.128:3000",
+  "http://local.vianch.com:5000",
+  "https://local.vianch.com:5000",
   "https://www.vianch.com",
   "http://www.vianch.com",
 ];
