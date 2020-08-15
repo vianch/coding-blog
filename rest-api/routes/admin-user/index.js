@@ -68,6 +68,7 @@ app.put(`${apiVersionPrefix}${adminPrefix}/logout`, (request, response) => {
   } else {
     api.removeUserAuthorizationToken(authUserId, apiResponse => {
       apiResponse.authSuccess = true;
+      response.clearCookie(loginCacheName);
       response.json(apiResponse);
     });
   }

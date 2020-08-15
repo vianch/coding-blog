@@ -5,7 +5,7 @@ const apiEnvironments = {
   TEST: "test",
 };
 
-const productionAdminUrl = 'http://admin.vianch.com';
+const productionAdminUrl = 'https://admin.vianch.com:3001';
 
 const loginCacheName = 'loginUser';
 
