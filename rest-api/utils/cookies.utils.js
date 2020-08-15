@@ -1,20 +1,16 @@
 const tldjs = require("tldjs")
 const get = require('lodash/get');
 
-const { productionAdminUrl, apiEnvironments, loginCacheName } = require("../core/constants");
+const { productionAdminUrl, loginCacheName } = require("../core/constants");
 
-const cookieSettings = (authTokenExpiresTimestamp) => {
-  const isProduction = process.env.NODE_ENV === apiEnvironments.PRODUCTION;
-
-  return ({
-    path: "/",
-    expires: new Date(authTokenExpiresTimestamp * 1000),
-    httpOnly: true,
-    secure: isProduction,
-    encode: String,
-    domain: isProduction ? tldjs.parse(productionAdminUrl).domain : "",
-  });
-}
+const cookieSettings = (authTokenExpiresTimestamp) => ({
+  path: "/",
+  expires: new Date(authTokenExpiresTimestamp * 1000),
+  httpOnly: true,
+  secure: true,
+  domain: `.${tldjs.parse(productionAdminUrl).domain}` || '',
+  sameSite: 'lax',
+});
 
 const getCookeData = request => {
   let cookies = get(request, `cookies.${loginCacheName}`);
