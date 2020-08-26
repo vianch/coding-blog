@@ -5,11 +5,17 @@ import palette from '~/theme/palette';
 const drawerWidth = 240;
 
 export const navigationStyles = makeStyles(theme => ({
-  drawer: {
+  root: {
+    width: 0,
+
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
     },
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
   },
   drawerPaper: {
     width: drawerWidth,

@@ -1,9 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const mainContainerStyles = makeStyles(() => ({
+export const mainContainerStyles = makeStyles((theme) => ({
   wrapper: {
-    position: 'relative',
-    left: '24rem',
-    top: '6.2rem',
+    flexGrow: 1,
+    padding: '6.2rem 0 0 24rem',
+
+    [theme.breakpoints.down('sm')]: {
+      padding: 0
+    },
   },
 }));

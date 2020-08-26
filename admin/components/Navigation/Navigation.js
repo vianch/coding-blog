@@ -25,22 +25,23 @@ export const Navigation = ({ mobileOpen, onDrawerToggle }) => {
   };
 
   return (
-    <nav aria-label="mailbox folders" className={classes.drawer}>
+    <nav aria-label="mailbox folders" className={classes.root}>
       {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-      <Hidden implementation="css" smUp>
+      <Hidden implementation="css" xsUp>
         <Drawer
           ModalProps={{ keepMounted: true }}
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          className={classes.drawer}
           classes={{ paper: classes.drawerPaper }}
           open={mobileOpen}
           variant="temporary"
           onClose={onDrawerToggle}
         >
-          <DrawerContent />
+          <DrawerContent onLogout={handleLogOut} />
         </Drawer>
       </Hidden>
 
-      <Hidden implementation="css" xsDown>
+      <Hidden implementation="css" smDown>
         <Drawer
           classes={{ paper: classes.drawerPaper }}
           open

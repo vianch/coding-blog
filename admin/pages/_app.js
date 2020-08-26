@@ -47,6 +47,11 @@ const NextPage = ({ Component, pageProps, cookie }) => {
     setMobileOpen(!isMobileOpen);
   };
 
+  const closeDrawToggle = () => {
+    console.log('asd')
+    setMobileOpen(false);
+  };
+
   const seLoggedInState = cacheResponse => {
     const shouldLoggedIn = authSelectors.isLoggedIn(
       createStore.store.getState(),
@@ -62,7 +67,6 @@ const NextPage = ({ Component, pageProps, cookie }) => {
     } else {
       setIsLoading(false);
     }
-
   };
 
   const loadAuth = () => {
@@ -82,6 +86,12 @@ const NextPage = ({ Component, pageProps, cookie }) => {
     loadAuth();
     removeServerCSS();
   }, [cookie, Component]);
+
+  useEffect(() => {
+    window.addEventListener('resize', closeDrawToggle);
+
+    return () => window.removeEventListener('resize', closeDrawToggle);
+  }, [])
 
   return (
     <>

@@ -3,12 +3,14 @@ const get = require('lodash/get');
 
 const { productionAdminUrl, loginCacheName } = require("../core/constants");
 
+const getDomain = () => `.${tldjs.parse(productionAdminUrl).domain}`;
+
 const cookieSettings = (authTokenExpiresTimestamp) => ({
   path: "/",
   expires: new Date(authTokenExpiresTimestamp * 1000),
   httpOnly: true,
   secure: true,
-  domain: `.${tldjs.parse(productionAdminUrl).domain}` || '',
+  domain: `${getDomain}` || '',
   sameSite: 'lax',
 });
 
@@ -28,4 +30,5 @@ const getCookeData = request => {
 module.exports = {
   cookieSettings,
   getCookeData,
+  getDomain
 };

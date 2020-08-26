@@ -8,7 +8,8 @@
     "thumbnailImageUrl": "https://assets.coderrocketfuel.com/coding-blog-react-thumbnail.png",
     "markdownContent": "# Blog Post Content",
     "seoTitleTag": "How to Create a Website with Next.js & React | Coding Blog",
-    "seoMetaDescription": "A complete guide on how to setup, configure, and build a website using the Next.js React framework."
+    "seoMetaDescription": "A complete guide on how to setup, configure, and build a website using the Next.js React framework.",
+    "state": "Active"
   },
   {
     "tags": ["nodejs"],
@@ -19,7 +20,8 @@
     "thumbnailImageUrl": "https://assets.coderrocketfuel.com/coding-blog-nodejs-thumbnail.png",
     "markdownContent": "# Blog Post Content",
     "seoTitleTag": "Create a REST API With NodeJS | Coding Blog",
-    "seoMetaDescription": "A guide on how to build a REST API using Node.js and Express."
+    "seoMetaDescription": "A guide on how to build a REST API using Node.js and Express.",
+    "state": "Active"
   },
   {
     "tags": ["css"],
@@ -30,7 +32,8 @@
     "thumbnailImageUrl": "https://assets.coderrocketfuel.com/coding-blog-css-thumbnail.png",
     "markdownContent": "# Blog Post Content",
     "seoTitleTag": "How to Use the CSS calc() Function | Coding Blog",
-    "seoMetaDescription": "Guide on how to use the CSS calc() function in CSS files."
+    "seoMetaDescription": "Guide on how to use the CSS calc() function in CSS files.",
+    "state": "Active"
   },
   {
     "tags": ["html"],
@@ -41,7 +44,8 @@
     "thumbnailImageUrl": "https://assets.coderrocketfuel.com/coding-blog-html-thumbnail.png",
     "markdownContent": "# Blog Post Content",
     "seoTitleTag": "How to Put Spaces Between Text in HTML | Coding Blog",
-    "seoMetaDescription": "Tutorial on adding spacing to HTML text with the <Pre> tag, HTML whitespace characters, and CSS empty span width and margin styling."
+    "seoMetaDescription": "Tutorial on adding spacing to HTML text with the <Pre> tag, HTML whitespace characters, and CSS empty span width and margin styling.",
+    "state": "Active"
   },
   {
     "tags": ["git"],
@@ -52,6 +56,7 @@
     "thumbnailImageUrl": "https://assets.coderrocketfuel.com/coding-blog-git-thumbnail.png",
     "markdownContent": "# Blog Post Content",
     "seoTitleTag": "Introduction to Git - Background, Installation, and Usage | Coding Blog",
-    "seoMetaDescription": "Introduction to Git version control software. Learn about the background and get a guide on installing and using Git."
+    "seoMetaDescription": "Introduction to Git version control software. Learn about the background and get a guide on installing and using Git.",
+    "state": "Active"
   }
 ]

@@ -6,7 +6,7 @@ const {
   adminPrefix,
   loginCacheName,
 } = require('../../core/constants');
-const { cookieSettings, getCookeData } = require('../../utils/cookies.utils');
+const { cookieSettings, getCookeData,getDomain } = require('../../utils/cookies.utils');
 const { routeErrorHandler } = require('../../utils/errorHandler');
 
 const api = require('./admin-user.api.js');
@@ -68,7 +68,10 @@ app.put(`${apiVersionPrefix}${adminPrefix}/logout`, (request, response) => {
   } else {
     api.removeUserAuthorizationToken(authUserId, apiResponse => {
       apiResponse.authSuccess = true;
-      response.clearCookie(loginCacheName);
+      response.clearCookie(loginCacheName, {
+        path: '/',
+        domain: `${getDomain}`
+      });
       response.json(apiResponse);
     });
   }

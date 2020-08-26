@@ -12,19 +12,24 @@ const TableHeader = ({ order, orderBy, onRequestSort }) => {
 
   const headCells = [
     {
-      id: 'name',
+      id: 'id',
       numeric: false,
-      disablePadding: true,
-      label: 'Dessert (100g serving)',
-    },
-    { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
-    { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
-    { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-    {
-      id: 'protein',
-      numeric: true,
       disablePadding: false,
-      label: 'Protein (g)',
+      label: 'Id',
+    },
+    {
+      id: 'postName',
+      numeric: false,
+      disablePadding: false,
+      label: 'Post name',
+    },
+    { id: 'date', numeric: false, disablePadding: false, label: 'Date' },
+    { id: 'state', numeric: false, disablePadding: false, label: 'State' },
+    {
+      id: 'labels',
+      numeric: false,
+      disablePadding: false,
+      label: 'Labels',
     },
   ];
 
@@ -37,10 +42,11 @@ const TableHeader = ({ order, orderBy, onRequestSort }) => {
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
+            variant='head'
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : oderTypes.ascendant}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
